@@ -16,8 +16,14 @@ app.use(express.json());
 
 // 引入路由
 const userRoutes = require('./src/routes/userRoutes');
+const { mongoConnect } = require('./src/services/mongodb');
 app.use('/api/users', userRoutes);
 
+async function connectMongo(){
+   await mongoConnect()
+}
+
+connectMongo()
 // 启动服务器
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

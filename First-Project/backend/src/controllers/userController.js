@@ -1,31 +1,17 @@
 const userModel = require('../models/userModel');
-
-// 模拟数据库中的用户数据 
-const users = [
-    new userModel(101, 'User1', 'user1@example.com'),
-    new userModel(201, 'User2', 'user2@example.com'),
-    new userModel(301, 'User3', 'user3@example.com'),
-    new userModel(401, 'User4', 'user4@example.com'),
-    new userModel(501, 'User5', 'user5@example.com'),
-    new userModel(601, 'User6', 'user6@example.com'),
-    // 添加更多用户...
-  ];
+const {existsUserWithId} = require('../models/userModel')
 
 // 用户控制器的业务逻辑
 const getAllUsers = (req, res) => {
   // 获取所有用户逻辑
-  return res.json({
-    name: 'Zhangsan',
-    id:1
-  })
 };
 
-const getUserById = (req, res) => {
+const getUserById = async (req, res) => {
   // 获取单个用户逻辑
   const userId = parseInt(req.params.id)
 
   // 模拟数据库查询
-  const user = users.find(user => user.id === userId)
+  const user = await existsUserWithId(userId)
 
   if(user){
     res.status(200).json(user)
@@ -34,9 +20,23 @@ const getUserById = (req, res) => {
   }
 };
 
-const createUser = (req, res) => {
-  // 创建用户逻辑
-};
+const addNewUser = async (req, res) => {
+    // 创建用户逻辑
+    const params = req.body;
+  
+    try {
+      // 使用 try-catch 捕获可能的错误
+      await userModel.saveUsers(params);
+  
+      // 发送成功响应
+      res.status(201).json({ message: 'User created successfully' });
+    } catch (error) {
+      // 发送错误响应
+      console.error('Error creating user:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  };
+  
 
 const updateUser = (req, res) => {
   // 更新用户逻辑
@@ -49,7 +49,7 @@ const deleteUser = (req, res) => {
 module.exports = {
   getAllUsers,
   getUserById,
-  createUser,
+  addNewUser,
   updateUser,
   deleteUser,
 };
