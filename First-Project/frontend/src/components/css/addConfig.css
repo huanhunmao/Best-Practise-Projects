@@ -1,6 +1,6 @@
 .modal-text{
-    display: flex;
-    justify-content: space-around;
+    /* display: flex; */
+    /* justify-content: space-around; */
     align-items: center;
     margin-bottom: 20px;
 }
@@ -18,4 +18,7 @@
 .time-choose{
     display: flex;
     align-items: center;
+}
+.error-text{
+    color: red;
 }

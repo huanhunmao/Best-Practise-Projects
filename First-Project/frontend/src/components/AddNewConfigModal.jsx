@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { Button, Modal,Input,DatePicker,Alert } from 'antd';
+import { Button, Modal,Input,DatePicker } from 'antd';
 import './css/addConfig.css'
 import { getUsersById } from '../services/addConfig';
+import ErrorFindUsers from './ErrorFindUsers';
 
 const AddNewConfigModal = (props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [error, setError] = useState(false);
+
     const showModal = () => {
       setIsModalOpen(true);
     };
@@ -14,6 +17,25 @@ const AddNewConfigModal = (props) => {
     const handleCancel = () => {
       setIsModalOpen(false);
     };
+    const handleInputChange = async (id) => {
+        try {
+            const res = await getUsersById(id);
+            console.log('res', res);
+      
+            if (!res) {
+              setError(true);
+            }else{
+                setError(true);
+            }
+          } catch (error) {
+            console.error('Error fetching user:', error);
+            setError(true);
+          }
+        };
+    const onChange  = () => {
+
+    }
+
     return (
       <>
         <Button type="primary" onClick={showModal}>
@@ -23,6 +45,7 @@ const AddNewConfigModal = (props) => {
             <div className='modal-text'>
             <div className='user-id'>{props.userId}</div>
             <Input placeholder={props.placeholder} onChange={handleInputChange}/>
+            { error && <ErrorFindUsers/>}
             </div>
           <div>
             {props.gameData.map((item, index) => (
@@ -44,16 +67,4 @@ const AddNewConfigModal = (props) => {
     );
   };
 
-  const onChange  = () => {
-
-  }
-
-  const handleInputChange = async (id) => {
-    const res = await getUsersById(id)
-    console.log('res',res);
-
-    if(res === undefined){
-        return <Alert message="Error Text" type="error" />
-    }
-  }
 export default AddNewConfigModal;
