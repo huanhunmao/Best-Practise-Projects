@@ -1,13 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
-import { Button } from 'antd';
 import 'antd/dist/antd.css';
+import AddNewConfig from './pages/AddNewConfig';
 
 function App() {
   return (
     <div>
-         <h1>Hello React with Ant Design</h1>
-        <Button type='primary'>Primary Button</Button>
+         <AddNewConfig/>
     </div>
   );
 }

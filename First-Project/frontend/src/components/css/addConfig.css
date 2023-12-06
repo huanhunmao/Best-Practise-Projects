@@ -1,0 +1,21 @@
+.modal-text{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.user-id{
+    width: 80px;
+}
+.time-select{
+    /* display: flex;
+    align-items: center; */
+    margin-bottom: 10px;
+}
+.game-label{
+    margin-right: 20px;
+}
+.time-choose{
+    display: flex;
+    align-items: center;
+}

@@ -3,6 +3,10 @@ const userModel = require('../models/userModel');
 // 用户控制器的业务逻辑
 const getAllUsers = (req, res) => {
   // 获取所有用户逻辑
+  return res.json({
+    name: 'Zhangsan',
+    id:1
+  })
 };
 
 const getUserById = (req, res) => {
