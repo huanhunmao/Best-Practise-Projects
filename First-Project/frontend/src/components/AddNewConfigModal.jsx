@@ -17,15 +17,16 @@ const AddNewConfigModal = (props) => {
     const handleCancel = () => {
       setIsModalOpen(false);
     };
-    const handleInputChange = async (id) => {
+    const handleInputBlur= async (id) => {
+        const userId = id.target.value;
         try {
-            const res = await getUsersById(id);
-            console.log('res', res);
-      
-            if (!res) {
-              setError(true);
-            }else{
+            const res = await getUsersById(userId);
+            
+            if (res.error) {
                 setError(true);
+            }else{
+                console.log('error',error);
+                setError(false);
             }
           } catch (error) {
             console.error('Error fetching user:', error);
@@ -44,7 +45,7 @@ const AddNewConfigModal = (props) => {
         <Modal title={props.title} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
             <div className='modal-text'>
             <div className='user-id'>{props.userId}</div>
-            <Input placeholder={props.placeholder} onChange={handleInputChange}/>
+            <Input placeholder={props.placeholder} onBlur={handleInputBlur}/>
             { error && <ErrorFindUsers/>}
             </div>
           <div>
