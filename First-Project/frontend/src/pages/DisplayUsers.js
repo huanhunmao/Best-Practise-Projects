@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Space, Table, Tag, Button,Spin } from 'antd';
 import { deleteUser, getAllUsers } from '../services/addConfig';
+import AddUsersModal from '../components/AddUsersModal';
 
         const DisplayUsers = () => {
             const [data, setData] = useState([]);
             const [loading, setLoading] = useState(true);
+            const [showEditModal, setShowEditModal] = useState(false)
+            const [modalData, setModalData] = useState({})
 
             const columns = [
                 {
@@ -52,14 +55,23 @@ import { deleteUser, getAllUsers } from '../services/addConfig';
                 {
                   title: 'Action',
                   key: 'action',
-                  render: (_,{_id}) => (
+                  render: (_,{_id,id,name,email,tags}) => (
                     <Space size="middle">
-                      <Button type='primary'>Update</Button>
-                      <Button   type="primary" danger onClick={() => deleteUserById(_id)}>Delete</Button>
+                      <Button type='primary' onClick={() => updateUserInfo({id,name,email,tags})}>Update</Button>
+                      <Button  type="primary" danger onClick={() => deleteUserById(_id)}>Delete</Button>
                     </Space>
                   ),
                 },
               ];
+            
+            const updateUserInfo = ({id,name,email,tags}) => {
+                setShowEditModal(true)
+                setModalData({id,name,email,tags})
+            }
+
+            const onOk = () => {
+                setShowEditModal(false)
+            }
 
             const deleteUserById = async (id) => {
                 try{
@@ -90,7 +102,11 @@ import { deleteUser, getAllUsers } from '../services/addConfig';
               return <Spin />;
             }
           
-            return <Table columns={columns} dataSource={data} />;
+            return !showEditModal ? 
+            <Table columns={columns} dataSource={data}/> :  
+            (<>
+            <Table columns={columns} dataSource={data}/> <AddUsersModal show={showEditModal} modalData={modalData} onOk={onOk}/>
+            </>  )
           };
           
 export default DisplayUsers;

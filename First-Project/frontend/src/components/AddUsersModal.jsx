@@ -3,10 +3,11 @@ import { addNewUser } from '../services/addConfig';
 import { useState } from 'react';
 
 const AddUsersModal = (props) => {
-    const [id,setId] = useState(null)
-    const [name,setName] = useState(null)
-    const [email,setEmail] = useState(null)
-    const [tags,setTags] = useState(null)
+    const {modalData}  = props;
+    const [id,setId] = useState(modalData&&modalData.id)
+    const [name,setName] = useState(modalData&&modalData.name)
+    const [email,setEmail] = useState(modalData&&modalData.email)
+    const [tags,setTags] = useState(modalData&&modalData.tags)
 
     const handleOk = async () => {
         await addNewUser({id,name,email,tags})

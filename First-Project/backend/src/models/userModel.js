@@ -1,12 +1,4 @@
 const usersDatabase = require('./userModel.mongo')
-
-  const user = {
-    id: 100, 
-    name: 'Zhangsan', 
-    email: '888@qq.com',
-    tags:['best person']
-}
-
   async function saveUsers(user) {
     await usersDatabase.findOneAndUpdate({
         id: user.id,
@@ -33,8 +25,6 @@ async function deleteUserById(id) {
         console.error('删除失败:', err);
     }
 }
-
-saveUsers(user)
 
   module.exports = {
     existsUserWithId,
