@@ -23,14 +23,14 @@ export async function getUsersById(userId) {
   }
 }
 
-export async function addNewUser({ id, name, email }) {
+export async function addNewUser({ id, name, email,tags }) {
     try {
       const response = await fetch(`${BASE_URL}/api/users`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id, name, email }),
+        body: JSON.stringify({ id, name, email,tags }),
       });
   
       const data = await response.json();

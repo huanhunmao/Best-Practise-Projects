@@ -4,7 +4,8 @@ const usersDatabase = require('./userModel.mongo')
   const user = {
     id: 100, 
     name: 'Zhangsan', 
-    email: '888@qq.com'
+    email: '888@qq.com',
+    tags:['best person']
 }
 
   async function saveUsers(user) {

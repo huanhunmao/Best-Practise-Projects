@@ -6,9 +6,10 @@ const AddUsersModal = (props) => {
     const [id,setId] = useState(null)
     const [name,setName] = useState(null)
     const [email,setEmail] = useState(null)
+    const [tags,setTags] = useState(null)
 
     const handleOk = async () => {
-        await addNewUser({id,name,email})
+        await addNewUser({id,name,email,tags})
         props.onOk()
     }
 
@@ -24,6 +25,10 @@ const AddUsersModal = (props) => {
         setEmail(e.target.value)
     }
 
+    const handleChangeTags = (e) => {
+        setTags(e.target.value.split(','))
+    }
+
     return (
         <Modal  title="Add New Users" open={props.show} onOk={handleOk} onCancel={props.onOk} >
             <div>
@@ -37,6 +42,10 @@ const AddUsersModal = (props) => {
             <div>
                 <p>Email</p>
                 <Input placeholder='请输入 邮箱' value={email} onChange={handleChangeEmail}/>
+            </div>
+            <div>
+                <p>Tags</p>
+                <Input placeholder='请输入 标签' value={tags} onChange={handleChangeTags}/>
             </div>
         </Modal>
     )
