@@ -1,5 +1,17 @@
 const BASE_URL = 'http://localhost:3000';
 
+export async function getAllUsers() {
+    try {
+      const response = await fetch(`${BASE_URL}/api/users`);
+      const data = await response.json();
+      console.log('data',data);
+      return data;
+    } catch (error) {
+      console.error('Error:', error);
+      throw error;
+    }
+  }
+
 export async function getUsersById(userId) {
   try {
     const response = await fetch(`${BASE_URL}/api/users/${userId}`);

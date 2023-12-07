@@ -1,15 +1,6 @@
 const axios = require('axios');
 const usersDatabase = require('./userModel.mongo')
 
-
-// 用户数据模型
-class User {
-    constructor(id, name, email) {
-      this.id = id;
-      this.name = name;
-      this.email = email;
-    }
-  }
   const user = {
     id: 100, 
     name: 'Zhangsan', 
@@ -30,9 +21,14 @@ async function existsUserWithId(id) {
     })
 }
 
+async function getUsers(){
+    return await usersDatabase.find({})
+}
+
 saveUsers(user)
 
   module.exports = {
     existsUserWithId,
-    saveUsers
+    saveUsers,
+    getUsers
   };

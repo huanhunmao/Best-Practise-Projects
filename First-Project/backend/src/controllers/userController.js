@@ -1,9 +1,15 @@
 const userModel = require('../models/userModel');
-const {existsUserWithId} = require('../models/userModel')
+const {existsUserWithId, getUsers} = require('../models/userModel')
 
 // 用户控制器的业务逻辑
-const getAllUsers = (req, res) => {
+const getAllUsers = async(req, res) => {
   // 获取所有用户逻辑
+  const users = await getUsers()
+  if(users){
+    res.status(200).json(users)
+  }else{
+    res.status(404).json({error:'not found any user'})
+  }
 };
 
 const getUserById = async (req, res) => {
