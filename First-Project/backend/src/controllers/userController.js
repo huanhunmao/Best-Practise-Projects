@@ -1,4 +1,10 @@
-const {existsUserWithId, getUsers,deleteUserById,saveUsers} = require('../models/userModel')
+const { 
+     existsUserWithId,
+     getUsers,
+     deleteUserById,
+     saveUsers,
+     updateUserById
+    } = require('../models/userModel')
 
 // 用户控制器的业务逻辑
 const getAllUsers = async(req, res) => {
@@ -43,8 +49,23 @@ const addNewUser = async (req, res) => {
   };
   
 
-const updateUser = (req, res) => {
+const updateUser = async(req, res) => {
   // 更新用户逻辑
+  const userId = req.params.id
+  const updateData = req.body;
+
+  try {
+
+    // 更新用户信息
+    await updateUserById(userId, updateData)
+
+    res.status(200).json({message:'User updated successfully'})
+
+  }catch (error) {
+    // 发送错误响应
+    console.error('Error updating user:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 };
 
 const deleteUser = async(req, res) => {

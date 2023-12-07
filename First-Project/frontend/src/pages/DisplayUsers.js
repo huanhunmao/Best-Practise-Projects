@@ -57,16 +57,16 @@ const DisplayUsers = ({sharedState,updateState}) => {
                   key: 'action',
                   render: (_,{_id,id,name,email,tags}) => (
                     <Space size="middle">
-                      <Button type='primary' onClick={() => updateUserInfo({id,name,email,tags})}>Update</Button>
+                      <Button type='primary' onClick={() => updateUserInfo({_id, id,name,email,tags})}>Update</Button>
                       <Button  type="primary" danger onClick={() => deleteUserById(_id)}>Delete</Button>
                     </Space>
                   ),
                 },
               ];
             
-            const updateUserInfo = ({id,name,email,tags}) => {
+            const updateUserInfo = ({_id,id,name,email,tags}) => {
                 setShowEditModal(true)
-                setModalData({id,name,email,tags})
+                setModalData({_id,id,name,email,tags})
             }
 
             const onOk = () => {
@@ -111,7 +111,7 @@ const DisplayUsers = ({sharedState,updateState}) => {
             return !showEditModal ? 
             <Table columns={columns} dataSource={data}/> :  
             (<>
-            <Table columns={columns} dataSource={data}/> <AddUsersModal show={showEditModal} modalData={modalData} onOk={onOk} updateState={updateState}/>
+            <Table columns={columns} dataSource={data}/> <AddUsersModal show={showEditModal} modalData={modalData} onOk={onOk} updateState={updateState} update={showEditModal}/>
             </>  )
           };
           

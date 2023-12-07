@@ -56,3 +56,22 @@ export async function addNewUser({ id, name, email,tags }) {
       throw error;
     }
   }
+
+export async function updateUser({ _id, id, name, email,tags }) {
+    // console.log('_id',_id);
+    try {
+      const response = await fetch(`${BASE_URL}/api/users/${id}/update`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id, name, email,tags }),
+      });
+  
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error:', error);
+      throw error;
+    }
+  }

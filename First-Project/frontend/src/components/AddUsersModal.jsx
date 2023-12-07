@@ -1,5 +1,5 @@
 import { Modal,Input, } from 'antd';
-import { addNewUser,getAllUsers } from '../services/addConfig';
+import { addNewUser,getAllUsers, updateUser } from '../services/addConfig';
 import React, { useState } from 'react';
 
 const AddUsersModal = (props) => {
@@ -10,7 +10,11 @@ const AddUsersModal = (props) => {
     const [tags,setTags] = useState(modalData&&modalData.tags)
 
     const handleOk = async () => {
-        await addNewUser({id,name,email,tags})
+        if(props.update){
+            await updateUser({_id:modalData._id,id,name,email,tags})
+        }else{
+            await addNewUser({id,name,email,tags})
+        }
         const result = await getAllUsers()
         props.updateState(result)
         props.onOk()
@@ -36,7 +40,7 @@ const AddUsersModal = (props) => {
         <Modal  title="Add New Users" open={props.show} onOk={handleOk} onCancel={props.onOk} >
             <div>
                 <p>ID</p>
-                <Input placeholder='请输入 ID' value={id} onChange={handleChangeId}/>
+                <Input placeholder='请输入 ID' value={id} onChange={handleChangeId} disabled={props.update}/>
             </div>
             <div>
                 <p>Name</p>
