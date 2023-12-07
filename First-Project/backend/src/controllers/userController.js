@@ -1,5 +1,4 @@
-const userModel = require('../models/userModel');
-const {existsUserWithId, getUsers} = require('../models/userModel')
+const {existsUserWithId, getUsers,deleteUserById,saveUsers} = require('../models/userModel')
 
 // 用户控制器的业务逻辑
 const getAllUsers = async(req, res) => {
@@ -32,7 +31,7 @@ const addNewUser = async (req, res) => {
   
     try {
       // 使用 try-catch 捕获可能的错误
-      await userModel.saveUsers(params);
+      await saveUsers(params);
   
       // 发送成功响应
       res.status(201).json({ message: 'User created successfully' });
@@ -48,8 +47,17 @@ const updateUser = (req, res) => {
   // 更新用户逻辑
 };
 
-const deleteUser = (req, res) => {
+const deleteUser = async(req, res) => {
   // 删除用户逻辑
+    const id = req.params.id;
+    try{
+        await deleteUserById(id)
+        // 发送成功响应
+      res.status(200).json({ message: 'User delete successfully' });
+    }catch(e){
+        console.error(e)
+        res.status(500).json({ error: 'Can not delete' });
+    }
 };
 
 module.exports = {

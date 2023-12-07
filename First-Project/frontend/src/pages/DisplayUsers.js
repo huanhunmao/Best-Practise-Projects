@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Space, Table, Tag } from 'antd';
-import { getAllUsers } from '../services/addConfig';
+import { Space, Table, Tag,Button } from 'antd';
+import { deleteUser, getAllUsers } from '../services/addConfig';
 const columns = [
   {
     title: 'ID',
@@ -47,37 +47,24 @@ const columns = [
   {
     title: 'Action',
     key: 'action',
-    render: (_,) => (
+    render: (_,{_id}) => (
       <Space size="middle">
-        <a>Update</a>
-        <a>Delete</a>
+        <Button type='primary'>Update</Button>
+        <Button   type="primary" danger onClick={() => deleteUserById(_id)}>Delete</Button>
       </Space>
     ),
   },
 ];
-// const data = [
-//   {
-//     key: '1',
-//     name: 'John Brown',
-//     age: 32,
-//     address: 'New York No. 1 Lake Park',
-//     tags: ['nice', 'developer'],
-//   },
-//   {
-//     key: '2',
-//     name: 'Jim Green',
-//     age: 42,
-//     address: 'London No. 1 Lake Park',
-//     tags: ['loser'],
-//   },
-//   {
-//     key: '3',
-//     name: 'Joe Black',
-//     age: 32,
-//     address: 'Sydney No. 1 Lake Park',
-//     tags: ['cool', 'teacher'],
-//   },
-// ];
+
+const deleteUserById = async (id) => {
+            try{
+                const result = await deleteUser(id)
+                console.log('result',result);
+            }catch(error){
+                console.error('Error delete data:', error);
+            }
+        }
+
 const DisplayUsers = () =>{ 
     const [data, setData] = useState([])
 

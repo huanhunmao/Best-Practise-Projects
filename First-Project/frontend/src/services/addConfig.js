@@ -40,4 +40,20 @@ export async function addNewUser({ id, name, email,tags }) {
       throw error;
     }
   }
+
+  export async function deleteUser(id) {
+    try {
+      const response = await fetch(`${BASE_URL}/api/users/${id}`,{
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
   
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error:', error);
+      throw error;
+    }
+  }
