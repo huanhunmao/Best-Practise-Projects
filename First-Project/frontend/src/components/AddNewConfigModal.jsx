@@ -3,10 +3,12 @@ import { Button, Modal,Input,DatePicker } from 'antd';
 import './css/addConfig.css'
 import { getUsersById } from '../services/addConfig';
 import ErrorFindUsers from './ErrorFindUsers';
+import UerInfo from './UerInfo';
 
 const AddNewConfigModal = (props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [error, setError] = useState(false);
+    const [userData, setUserData] = useState({});
 
     const showModal = () => {
       setIsModalOpen(true);
@@ -21,6 +23,7 @@ const AddNewConfigModal = (props) => {
         const userId = id.target.value;
         try {
             const res = await getUsersById(userId);
+            setUserData(res)
             
             if (res.error) {
                 setError(true);
@@ -40,13 +43,14 @@ const AddNewConfigModal = (props) => {
     return (
       <>
         <Button type="primary" onClick={showModal}>
-          Open Modal
+          Open Config Modal
         </Button>
         <Modal title={props.title} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
             <div className='modal-text'>
             <div className='user-id'>{props.userId}</div>
             <Input placeholder={props.placeholder} onBlur={handleInputBlur}/>
             { error && <ErrorFindUsers/>}
+            {!error && <UerInfo {...userData}/>}
             </div>
           <div>
             {props.gameData.map((item, index) => (
