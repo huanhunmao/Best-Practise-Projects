@@ -2,9 +2,8 @@ const BASE_URL = 'http://localhost:3000';
 
 export async function getAllUsers() {
     try {
-      const response = await fetch(`${BASE_URL}/api/users`);
+      const response = await fetch(`${BASE_URL}/api/users/getUsers`);
       const data = await response.json();
-      console.log('data',data);
       return data;
     } catch (error) {
       console.error('Error:', error);
@@ -14,7 +13,7 @@ export async function getAllUsers() {
 
 export async function getUsersById(userId) {
   try {
-    const response = await fetch(`${BASE_URL}/api/users/${userId}`);
+    const response = await fetch(`${BASE_URL}/api/users/${userId}/getUserById`);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -25,7 +24,7 @@ export async function getUsersById(userId) {
 
 export async function addNewUser({ id, name, email,tags }) {
     try {
-      const response = await fetch(`${BASE_URL}/api/users`, {
+      const response = await fetch(`${BASE_URL}/api/users/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -43,7 +42,7 @@ export async function addNewUser({ id, name, email,tags }) {
 
   export async function deleteUser(id) {
     try {
-      const response = await fetch(`${BASE_URL}/api/users/${id}`,{
+      const response = await fetch(`${BASE_URL}/api/users/${id}/delete`,{
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
