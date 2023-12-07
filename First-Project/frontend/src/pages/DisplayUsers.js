@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Space, Table, Tag, Button,Spin } from 'antd';
 import { deleteUser, getAllUsers } from '../services/addConfig';
 import AddUsersModal from '../components/AddUsersModal';
 
-        const DisplayUsers = () => {
+const DisplayUsers = ({sharedState,updateState}) => {
             const [data, setData] = useState([]);
             const [loading, setLoading] = useState(true);
             const [showEditModal, setShowEditModal] = useState(false)
@@ -84,6 +84,12 @@ import AddUsersModal from '../components/AddUsersModal';
             }
           
             useEffect(() => {
+                if (sharedState) {
+                  setData(sharedState);
+                }
+              }, [sharedState]);
+            
+            useEffect(() => {
               const fetchData = async () => {
                 try {
                   const result = await getAllUsers();
@@ -105,7 +111,7 @@ import AddUsersModal from '../components/AddUsersModal';
             return !showEditModal ? 
             <Table columns={columns} dataSource={data}/> :  
             (<>
-            <Table columns={columns} dataSource={data}/> <AddUsersModal show={showEditModal} modalData={modalData} onOk={onOk}/>
+            <Table columns={columns} dataSource={data}/> <AddUsersModal show={showEditModal} modalData={modalData} onOk={onOk} updateState={updateState}/>
             </>  )
           };
           

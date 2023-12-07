@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, } from 'antd';
 import AddUsersModal from "../components/AddUsersModal"
 
-const AddNewUsers = () => {
+const AddNewUsers = ({updateState}) => {
     const [show, setShow] = useState(false)
 
     const handleClick = () => {
@@ -16,7 +16,7 @@ const AddNewUsers = () => {
     return (
         <div style={{marginRight:'100px',marginBottom:'10px'}}>
         <Button type="primary" onClick={handleClick}>Add New Users</Button>
-        <AddUsersModal show={show} onOk={onOk}/>
+        <AddUsersModal show={show} onOk={onOk} updateState={updateState}/>
         </div>
     )
 }

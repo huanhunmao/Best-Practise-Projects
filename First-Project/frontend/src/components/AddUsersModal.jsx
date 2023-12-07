@@ -1,6 +1,6 @@
 import { Modal,Input, } from 'antd';
-import { addNewUser } from '../services/addConfig';
-import { useState } from 'react';
+import { addNewUser,getAllUsers } from '../services/addConfig';
+import React, { useState } from 'react';
 
 const AddUsersModal = (props) => {
     const {modalData}  = props;
@@ -11,6 +11,8 @@ const AddUsersModal = (props) => {
 
     const handleOk = async () => {
         await addNewUser({id,name,email,tags})
+        const result = await getAllUsers()
+        props.updateState(result)
         props.onOk()
     }
 
