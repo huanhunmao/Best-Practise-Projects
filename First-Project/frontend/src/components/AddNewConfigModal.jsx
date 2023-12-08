@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal,Input,DatePicker } from 'antd';
 import './css/addConfig.css'
-import { getUsersById } from '../services/addConfig';
+import { getUsersById } from '../services/users';
 import ErrorFindUsers from './ErrorFindUsers';
 import UerInfo from './UerInfo';
 

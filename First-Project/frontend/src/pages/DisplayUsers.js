@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Space, Table, Tag, Button,Spin } from 'antd';
-import { deleteUser, getAllUsers } from '../services/addConfig';
+import { deleteUser, getAllUsers } from '../services/users';
 import AddUsersModal from '../components/AddUsersModal';
 
 const DisplayUsers = ({sharedState,updateState}) => {

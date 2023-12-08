@@ -3,6 +3,7 @@ import AddNewConfig from './pages/AddNewConfig';
 import AddNewUsers from './pages/AddNewUsers';
 import DisplayUsers from './pages/DisplayUsers';
 import React, { useState } from 'react';
+import ConfigGameList from './pages/ConfigGameList';
 
 // 创建上下文
 const SharedContext = React.createContext();
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <SharedContext.Provider value={{ sharedState, setSharedState }}>
+        <ConfigGameList/>
         <div style={{display:'flex',justifyContent:'flex-end',margin:'20px'}}>
         <AddNewUsers updateState={handleUpdateState}/>
         <AddNewConfig/>

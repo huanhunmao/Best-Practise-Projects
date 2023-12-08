@@ -1,5 +1,5 @@
 import { Modal,Input, } from 'antd';
-import { addNewUser,getAllUsers, updateUser } from '../services/addConfig';
+import { addNewUser,getAllUsers, updateUser } from '../services/users';
 import React, { useState } from 'react';
 
 const AddUsersModal = (props) => {
