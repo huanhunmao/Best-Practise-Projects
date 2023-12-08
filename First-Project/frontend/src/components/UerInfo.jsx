@@ -2,7 +2,7 @@ import React from "react"
 
 const UerInfo = ({name,email}) => {
     return <>
-    <p style={{color:'green'}}>{name}-{email}</p>
+    {name && <p style={{color:'green'}}>{name}-{email}</p>}
     </>
 }
 export default UerInfo

@@ -31,7 +31,7 @@ const ConfigGameListModal = () => {
     return (
         <>
         <Button type="primary" onClick={showModal}>
-        Open Modal
+        ConfigGameList
       </Button>
         <Modal title="新增列表" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
             <h4>类型</h4>

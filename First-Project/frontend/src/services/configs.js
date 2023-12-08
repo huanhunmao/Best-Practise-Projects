@@ -2,7 +2,7 @@ const BASE_URL = 'http://localhost:3000';
 
 export async function getAllConfigs() {
     try {
-      const response = await fetch(`${BASE_URL}/api/configs/getUsers`);
+      const response = await fetch(`${BASE_URL}/api/configs/getConfigs`);
       const data = await response.json();
       return data;
     } catch (error) {

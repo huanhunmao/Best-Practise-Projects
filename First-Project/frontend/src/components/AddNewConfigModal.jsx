@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Modal,Input,DatePicker } from 'antd';
+import { Button, Modal,Input, DatePicker } from 'antd';
 import './css/addConfig.css'
 import { getUsersById } from '../services/users';
 import ErrorFindUsers from './ErrorFindUsers';
@@ -9,6 +9,11 @@ const AddNewConfigModal = (props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [error, setError] = useState(false);
     const [userData, setUserData] = useState({});
+
+    const gameData = JSON.parse(props.gameDataList) || [];
+
+    console.log('Is gameData an array?', Array.isArray(gameData))
+
 
     const showModal = () => {
       setIsModalOpen(true);
@@ -40,6 +45,25 @@ const AddNewConfigModal = (props) => {
 
     }
 
+    const getRightType = (type) => {
+        switch(type){
+            case 1:
+                return '游戏'
+            case 2:
+                return '娱乐'
+            case 3:
+                return '体育'
+            default:
+                return '游戏'
+        }
+
+    }
+
+    console.log('gameData2333',gameData);
+    if(gameData.length === 0){
+        return null
+    }
+
     return (
       <>
         <Button type="primary" onClick={showModal}>
@@ -53,10 +77,11 @@ const AddNewConfigModal = (props) => {
             {!error && <UerInfo {...userData}/>}
             </div>
           <div>
-            {props.gameData.map((item, index) => (
+            <>
+            {Array.isArray(gameData) && gameData.length > 0 && gameData.map((item, index) => (
                 <div className='time-select' key={index}>
                 <div>
-                <span>{props.type}{item.value}:</span>
+                <span>{getRightType(item.type)}{item.key}:</span>
                 <span>{item.label}</span>
                 </div>
                 <div className='time-choose'>
@@ -64,8 +89,8 @@ const AddNewConfigModal = (props) => {
                 <DatePicker onChange={onChange} />
                 </div>
                 </div>
-            )
-            )}
+            ))}
+            </>
           </div>
         </Modal>
       </>
