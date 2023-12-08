@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
+require('dotenv').config()
 const port = process.env.PORT || 3000;
+
+console.log('process.env.PORT ',process.env.PORT );
 
 // 允许所有域名的跨域请求，实际生产环境中应该根据需要设置允许的域名
 app.use((req, res, next) => {
