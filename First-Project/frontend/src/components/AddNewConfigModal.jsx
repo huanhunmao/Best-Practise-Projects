@@ -12,9 +12,6 @@ const AddNewConfigModal = (props) => {
 
     const gameData = JSON.parse(props.gameDataList) || [];
 
-    console.log('Is gameData an array?', Array.isArray(gameData))
-
-
     const showModal = () => {
       setIsModalOpen(true);
     };
@@ -59,7 +56,6 @@ const AddNewConfigModal = (props) => {
 
     }
 
-    console.log('gameData2333',gameData);
     if(gameData.length === 0){
         return null
     }

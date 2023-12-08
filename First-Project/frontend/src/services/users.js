@@ -57,8 +57,7 @@ export async function addNewUser({ id, name, email,tags }) {
     }
   }
 
-export async function updateUser({ _id, id, name, email,tags }) {
-    // console.log('_id',_id);
+export async function updateUser({ id, name, email,tags }) {
     try {
       const response = await fetch(`${BASE_URL}/api/users/${id}/update`, {
         method: 'PUT',
