@@ -1,10 +1,13 @@
 // 展示订单评价页面
 
+import { useState } from "react";
+import OrderEvaluationModal from "../components/OrderEvaluationModal";
+
 const OrderEvaluation = () => {
 
     return (
         <>
-        <h1>test</h1>
+        <OrderEvaluationModal/>
         </>
     )
 }

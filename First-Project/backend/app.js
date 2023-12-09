@@ -20,6 +20,7 @@ const userRoutes = require('./src/routes/userRoutes');
 const { mongoConnect } = require('./src/services/mongodb');
 app.use('/api/users', userRoutes);
 app.use('/api/configs', userRoutes);
+app.use('/api/orders', userRoutes);
 
 async function connectMongo(){
    await mongoConnect()
