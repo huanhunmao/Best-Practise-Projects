@@ -6,11 +6,9 @@ const OrderInfo = ({imgPath, typeName, name, ifKnowName, knowName1, knowName2}) 
     const [value2, setValue2] = useState(2)
 
     const onChange1 = (e)=> {
-        console.log(e.target.value);
         setValue1(e.target.value)
     }
     const onChange2 = (e)=> {
-        console.log(e.target.value);
         setValue2(e.target.value)
     }
 
@@ -24,8 +22,8 @@ const OrderInfo = ({imgPath, typeName, name, ifKnowName, knowName1, knowName2}) 
                 <p>{name}</p>
                 </div>
                 </div>
-                {knowName1 &&<div className="info_choose"><Radio onChange={onChange1} value={value1}>{ifKnowName}</Radio></div>}
-               {knowName2 && <div className="info_choose"><Radio onChange={onChange2} value={value2}>{ifKnowName}</Radio></div>}
+                {knowName1 &&<div className="info_choose"><Radio checked={ifKnowName} onChange={onChange1} value={value1}>{ifKnowName}</Radio></div>}
+               {knowName2 && <div className="info_choose"><Radio checked={ifKnowName} onChange={onChange2} value={value2}>{ifKnowName}</Radio></div>}
             </div>
         </>
     )
