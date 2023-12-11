@@ -21,6 +21,7 @@ const { mongoConnect } = require('./src/services/mongodb');
 app.use('/api/users', userRoutes);
 app.use('/api/configs', userRoutes);
 app.use('/api/orders', userRoutes);
+app.use('/api/items', userRoutes);
 
 async function connectMongo(){
    await mongoConnect()

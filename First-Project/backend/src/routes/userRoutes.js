@@ -3,6 +3,7 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 const configListController = require('../controllers/configListController');
 const orderController = require('../controllers/orderController');
+const itemController = require('../controllers/itemController');
 
 // 定义用户相关的路由
 router.get('/getUsers', userController.getAllUsers);
@@ -18,5 +19,9 @@ router.post('/createConfig', configListController.saveConfig);
 // 定义 orders 相关路由
 router.get('/getAllOrder', orderController.getAllOrder);
 router.post('/saveOrder', orderController.saveOrder);
+
+// 定义 items 相关路由
+router.get('/getAllItems', itemController.getAllItems);
+router.post('/saveItem', itemController.saveItem);
 
 module.exports = router;
