@@ -4,6 +4,7 @@ const userController = require('../controllers/userController');
 const configListController = require('../controllers/configListController');
 const orderController = require('../controllers/orderController');
 const itemController = require('../controllers/itemController');
+const itemPluController = require('../controllers/itemPluController');
 
 // 定义用户相关的路由
 router.get('/getUsers', userController.getAllUsers);
@@ -23,5 +24,8 @@ router.post('/saveOrder', orderController.saveOrder);
 // 定义 items 相关路由
 router.get('/getAllItems', itemController.getAllItems);
 router.post('/saveItem', itemController.saveItem);
+
+router.get('/getAllItemsMore', itemPluController.getAllItems);
+router.post('/saveItemMore', itemPluController.saveItem);
 
 module.exports = router;

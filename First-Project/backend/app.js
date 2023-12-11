@@ -18,16 +18,20 @@ app.use(express.json());
 // 引入路由
 const userRoutes = require('./src/routes/userRoutes');
 const { mongoConnect } = require('./src/services/mongodb');
+
+async function connectMongo(){
+    await mongoConnect()
+ }
+ 
+ connectMongo()
+
 app.use('/api/users', userRoutes);
 app.use('/api/configs', userRoutes);
 app.use('/api/orders', userRoutes);
 app.use('/api/items', userRoutes);
+app.use('/api/itemPlu', userRoutes);
 
-async function connectMongo(){
-   await mongoConnect()
-}
 
-connectMongo()
 // 启动服务器
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
