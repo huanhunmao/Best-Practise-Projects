@@ -30,6 +30,8 @@ app.use('/api/configs', userRoutes);
 app.use('/api/orders', userRoutes);
 app.use('/api/items', userRoutes);
 app.use('/api/itemPlu', userRoutes);
+app.use('/api/buyOrder', userRoutes);
+app.use('/api/buyUser', userRoutes);
 
 
 // 启动服务器
