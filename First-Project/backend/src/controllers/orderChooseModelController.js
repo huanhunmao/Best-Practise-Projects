@@ -1,6 +1,7 @@
 const { 
     saveOrderItems,
-    getOrderItems
+    getOrderItems,
+    existsOrderWithIds
    } = require('../models/orderChooseModel')
 
 const getOrderItem = async(req, res) => {
@@ -27,7 +28,21 @@ const saveOrderItem = async(req, res) => {
         }
 }
 
+const getOrderById = async (req, res) => {
+    const orderId = parseInt(req.params.id)
+    console.log('orderId',orderId);
+  
+    const user = await existsOrderWithIds(orderId)
+  
+    if(user){
+      res.status(200).json(user)
+    }else{
+      res.status(404).json([])
+    }
+  };
+
 module.exports = {
     getOrderItem,
     saveOrderItem,
+    getOrderById
 }

@@ -31,7 +31,7 @@ function App() {
     <SharedContext.Provider value={{ sharedState, setSharedState }}>
     <Router>
   <Routes>
-    <Route path="/" element={<Home/>} />
+    <Route path="/"  element={<Home/>} />
     <Route path="/config-game-list" element={<ConfigGameList />} />
     <Route path="/add-new-config" element={<AddNewConfig />} />
     <Route path="/order-evaluation" element={<OrderEvaluation />} />

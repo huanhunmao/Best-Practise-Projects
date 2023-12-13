@@ -48,7 +48,19 @@ async function getOrderItems(){
     })
 
 }
+
+async function existsOrderWithIds(id) {
+    if(!id){
+        return false;
+    }
+
+     return await orderChooseModel.find({
+        id
+    });
+}
+
   module.exports = {
     saveOrderItems,
     getOrderItems,
+    existsOrderWithIds
   };

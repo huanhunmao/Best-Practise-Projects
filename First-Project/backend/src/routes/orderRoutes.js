@@ -5,5 +5,6 @@ const orderChooseModelController = require('../controllers/orderChooseModelContr
 // 定义Order相关的路由
 router.get('/getOrderItem', orderChooseModelController.getOrderItem);
 router.post('/saveOrderItem', orderChooseModelController.saveOrderItem);
+router.get('/:id/getOrderById', orderChooseModelController.getOrderById);
 
 module.exports = router;
