@@ -1,0 +1,8 @@
+.food_choose{
+    display: flex;
+    justify-content: space-between;
+    &_inner{
+        display: flex;
+        justify-content: space-around;
+    }
+}
