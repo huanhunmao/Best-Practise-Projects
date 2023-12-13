@@ -17,6 +17,7 @@ app.use(express.json());
 
 // 引入路由
 const userRoutes = require('./src/routes/userRoutes');
+const orderRoutes = require('./src/routes/orderRoutes');
 const { mongoConnect } = require('./src/services/mongodb');
 
 async function connectMongo(){
@@ -32,6 +33,8 @@ app.use('/api/items', userRoutes);
 app.use('/api/itemPlu', userRoutes);
 app.use('/api/buyOrder', userRoutes);
 app.use('/api/buyUser', userRoutes);
+
+app.use('/api/order', orderRoutes);
 
 
 // 启动服务器
