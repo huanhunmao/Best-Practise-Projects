@@ -1,17 +1,20 @@
 // src/components/Login.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, message } from 'antd';
 import axios from 'axios';
 
 const Login = () => {
   const [form] = Form.useForm();
+  const navigate = useNavigate();
 
   const handleLogin = values => {
     axios.post('http://localhost:3001/api/user/login', values)
       .then(response => {
         message.success('Login successful!');
         form.resetFields();
-        // 在此处处理登录成功后的操作，例如重定向到用户的个人页面
+        
+        navigate('/product-list');
       })
       .catch(error => {
         message.error('Login failed. Please check your credentials.');

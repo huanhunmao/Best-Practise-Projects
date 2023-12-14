@@ -1,16 +1,20 @@
 // src/components/Register.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, message } from 'antd';
 import axios from 'axios';
 
 const Register = () => {
   const [form] = Form.useForm();
+  const navigate = useNavigate();
 
   const handleRegister = values => {
     axios.post('http://localhost:3001/api/user/register', values)
       .then(response => {
         message.success('Registration successful!');
         form.resetFields();
+
+        navigate('/login');
       })
       .catch(error => {
         message.error('Registration failed. Please try again.');

@@ -78,17 +78,24 @@ async function saveProducts(req, res){
 
 saveProducts()
 
-async function getProductById(req, res){
+async function getProductById(req, res) {
+    const price = req.params.id;
 
-    const name = req.params.name
     try {
-        const products = await Product.findOne({name});
-        res.json(products);
-      } catch (error) {
-        console.error('Error getting products in:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-      }
+        const product = await Product.findOne({ price });
+
+        if(product){
+            res.json(product);
+        }else{
+            res.json('');
+        }
+
+    } catch (error) {
+        console.error('Error getting product:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 }
+
 
 module.exports = {
     getAllProducts,
