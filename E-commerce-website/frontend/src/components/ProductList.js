@@ -10,7 +10,7 @@ const ProductList = () => {
 
   useEffect(() => {
     // 获取产品列表
-    axios.get('/api/products')
+    axios.get('http://localhost:3001/api/product/getAllProducts')
       .then(response => setProducts(response.data))
       .catch(error => console.error('Error fetching products:', error));
   }, []);
