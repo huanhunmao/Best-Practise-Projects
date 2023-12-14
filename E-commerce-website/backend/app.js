@@ -25,7 +25,7 @@ async function connectMongo(){
  
  connectMongo()
 
-app.use('/api/users', userRoutes);
+app.use('/api/user', userRoutes);
 
 
 // 启动服务器

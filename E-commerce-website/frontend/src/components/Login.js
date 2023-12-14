@@ -7,7 +7,7 @@ const Login = () => {
   const [form] = Form.useForm();
 
   const handleLogin = values => {
-    axios.post('/api/login', values)
+    axios.post('http://localhost:3001/api/user/login', values)
       .then(response => {
         message.success('Login successful!');
         form.resetFields();

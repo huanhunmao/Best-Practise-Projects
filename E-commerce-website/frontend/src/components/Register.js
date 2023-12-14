@@ -7,7 +7,7 @@ const Register = () => {
   const [form] = Form.useForm();
 
   const handleRegister = values => {
-    axios.post('/api/register', values)
+    axios.post('http://localhost:3001/api/user/register', values)
       .then(response => {
         message.success('Registration successful!');
         form.resetFields();

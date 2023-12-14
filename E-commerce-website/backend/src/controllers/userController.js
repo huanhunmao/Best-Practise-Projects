@@ -1,90 +1,58 @@
-const { 
-     existsUserWithId,
-     getUsers,
-     deleteUserById,
-     saveUsers,
-     updateUserById
-    } = require('../models/userModel')
+const jwt = require('jsonwebtoken');
+const User = require('../models/userModel.mongo')
 
-// 用户控制器的业务逻辑
-const getAllUsers = async(req, res) => {
-  // 获取所有用户逻辑
-  const users = await getUsers()
-  if(users){
-    res.status(200).json(users)
-  }else{
-    res.status(404).json({error:'not found any user'})
-  }
+const loginUser = async(req, res) => {
+ try{
+    const {email, password} = req.body
+        // 查找用户
+        const user = await User.findOne({email})
+
+        if(!user){
+            return res.status(401).json({ error: 'Invalid credentials' });
+        }
+
+        // 验证密码
+        const isValidPassword =  await user.comparePassword(password)
+
+        if (!isValidPassword) {
+            return res.status(401).json({ error: 'Invalid credentials' });
+          }
+
+          // 生成token并返回给客户端
+          const token = jwt.sign({userId: user.id},'your-secret-key')
+          res.json({token})
+ }catch(error){
+    console.error('Error logging in:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+ }
 };
 
-const getUserById = async (req, res) => {
-  // 获取单个用户逻辑
-  const userId = parseInt(req.params.id)
+const registerUser = async(req, res) => {
 
-  // 模拟数据库查询
-  const user = await existsUserWithId(userId)
+    try{
+        const {username,email, password} = req.body
+     // 检查用户名和邮箱是否已存在
+     const existingUser = await User.findOne({$or:[{username, email}]})
 
-  if(user){
-    res.status(200).json(user)
-  }else{
-    res.status(404).json({error:'NotFound'})
-  }
-};
+     if (existingUser) {
+         return res.status(400).json({ error: 'Username or email already exists' });
+       }
 
-const addNewUser = async (req, res) => {
-    // 创建用户逻辑
-    const params = req.body;
+      // 创建新用户
+      const newUser = new User({ username, email, password });
+      await newUser.save();
   
-    try {
-      // 使用 try-catch 捕获可能的错误
-      await saveUsers(params);
-  
-      // 发送成功响应
-      res.status(201).json({ message: 'User created successfully' });
-    } catch (error) {
-      // 发送错误响应
-      console.error('Error creating user:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
+      // 生成token并返回给客户端
+      const token = jwt.sign({ userId: newUser._id }, 'your-secret-key');
+      res.json({ token });
+    }catch(error){
+        console.error('Error logging in:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
   };
-  
 
-const updateUser = async(req, res) => {
-  // 更新用户逻辑
-  const userId = req.params.id
-  const updateData = req.body;
-
-  try {
-
-    // 更新用户信息
-    await updateUserById(userId, updateData)
-
-    res.status(200).json({message:'User updated successfully'})
-
-  }catch (error) {
-    // 发送错误响应
-    console.error('Error updating user:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-};
-
-const deleteUser = async(req, res) => {
-  // 删除用户逻辑
-    const id = req.params.id;
-    try{
-        await deleteUserById(id)
-        // 发送成功响应
-      res.status(200).json({ message: 'User delete successfully' });
-    }catch(e){
-        console.error(e)
-        res.status(500).json({ error: 'Can not delete' });
-    }
-};
 
 module.exports = {
-  getAllUsers,
-  getUserById,
-  addNewUser,
-  updateUser,
-  deleteUser,
+    loginUser,
+    registerUser,
 };
