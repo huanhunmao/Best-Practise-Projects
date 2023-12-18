@@ -35,11 +35,13 @@ io.on('connection', function(socket) {
 
     try {
       // Get a reply from OpenAI GPT-3
-      const response = await openai.complete({
-        engine: 'gpt-3.5-turbo',
-        prompt: `前端说：${text}`, // Include the user's input in the prompt
-        max_tokens: 150 // Control the length of the reply
+
+      const response = await openai.chat.completions.create({
+        messages: [{ role: "system", content:text }],
+        model: "gpt-3.5-turbo",
       });
+      
+      console.log('response',response);
 
       const aiText = response.choices[0].text.trim();
       console.log('Bot reply: ' + aiText);
